@@ -45,4 +45,19 @@ $(document).ready(function () {
     $('#louisvilleWeatherButton').on('click', function () {
         $('#louisvilleWeather').toggle();
     });
+
+    //The background color of any table row should change to “WhiteSmoke” when the mouse pointer is hovering over the row.
+    //The background color of the row should return to white when the mouse pointer is no longer hovering over the row.
+     //This applies to all rows in all tables except the first(header) row in a given table.The first(header) row in any table should not change appearance when the mouse pointer hovers over it.
+    $('tr').hover(
+        function () {
+            //in callback
+            $(this).css('background-color', 'whitesmoke');
+        },
+        function () {
+            //out callback
+            //The background color of the row should return to white when the mouse pointer is no longer hovering over the row.
+            $(this).css('background-color', '');
+        }
+    );
 });
