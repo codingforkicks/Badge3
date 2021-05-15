@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loadContacts();
     addContact();
+    updateContact();
 });
 
 
@@ -114,4 +115,37 @@ function hideEditForm() {
 
     $('#contactTableDiv').show();
     $('#editFormDiv').hide();
+}
+
+function updateContact(contactId) {
+    $('#updateButton').click(function (event) {
+        $.ajax({
+            type: 'PUT',
+            url: 'https://tsg-contactlist.herokuapp.com/contact/' + $('#editContactId').val(),
+            data: JSON.stringify({
+                contactId: $('#editContactId').val(),
+                firstName: $('#editFirstName').val(),
+                lastName: $('#editLastName').val(),
+                company: $('#editCompany').val(),
+                phone: $('#editPhone').val(),
+                email: $('#editEmail').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json',
+            'success': function () {
+                $('#errorMessage').empty();
+                hideEditForm();
+                loadContacts();
+            },
+            'error': function () {
+                $('#errorMessages')
+                    .append($('<li>')
+                        .attr({ class: 'list-group-item list-group-item-danger' })
+                        .text('Error calling web service. Please try again later.'));
+            }
+        })
+    })
 }
