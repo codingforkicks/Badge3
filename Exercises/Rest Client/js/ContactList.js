@@ -2,6 +2,7 @@ $(document).ready(function () {
     loadContacts();
     addContact();
     updateContact();
+    deleteContact();
 });
 
 
@@ -22,7 +23,7 @@ function loadContacts() {
                 row += '<td>' + name + '</td>';
                 row += '<td>' + company + '</td>';
                 row += '<td><button type="button" class="btn btn-info" onclick="showEditForm(' + contactId + ')">Edit</button></td>';
-                row += '<td><button type="button" class="btn btn-danger" >Delete</button></td>';
+                row += '<td><button type="button" class="btn btn-danger" onclick="deleteContact(' + contactId + ')">Delete</button></td>';
                 row += '</tr>';
 
                 contentRows.append(row);
@@ -148,4 +149,14 @@ function updateContact(contactId) {
             }
         })
     })
+}
+
+function deleteContact(contactId) {
+    $.ajax({
+        type: 'DELETE',
+        url: 'https://tsg-contactlist.herokuapp.com/contact/' + contactId,
+        success: function () {
+            loadContacts();
+        }
+    });
 }
