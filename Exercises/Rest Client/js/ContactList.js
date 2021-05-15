@@ -24,7 +24,10 @@ function loadContacts() {
             })
         },
         error: function () {
-
+            $('#errorMessages')
+                .append($('<li>')
+                    .attr({ class: 'list-group-item list-group-item-danger' })
+                    .text('Error calling web service. Please try again later.'));
         }
     })
 }
