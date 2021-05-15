@@ -1,7 +1,6 @@
 //File for use in Ajax lesson
 
 $(document).ready(function () {
-
     $.ajax({
         type: 'GET',
         url: 'https://tsg-contactlist.herokuapp.com/contacts',
@@ -23,5 +22,4 @@ $(document).ready(function () {
             alert('FAILURE!');
         }
     })
-
 })
