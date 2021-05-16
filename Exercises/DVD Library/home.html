@@ -161,11 +161,11 @@
 
                 <div class="form-group row">
                     <div class="offset-md-3 col-md-3">
-                        <input type="hidden" id="editContactId">
+                        <input type="hidden" id="editMovieId">
                         <button type="button"
                                 id="editCancelButton"
                                 class="btn btn-danger"
-                                onclick="hideEditForm()">
+                                onclick="hideForm()">
                             Cancel
                         </button>
                     </div>
@@ -173,7 +173,7 @@
                         <button type="button"
                                 id="updateButton"
                                 class="btn btn-success">
-                            Update Contact
+                            Save Changes
                         </button>
                     </div>
                 </div>
@@ -182,8 +182,25 @@
 
         <!--add screen-->
         <div id="addDiv" style="display:none;">
-
+ 
         </div>
+
+        <!--Display Movie Info-->
+        <div id="displayDiv" style="display:none;">
+            <h2 id="displayHeader"></h2>
+            <hr>
+            <div id="displayContent"></div>
+            <div class="offset-md-3 col-md-3">
+                <input type="hidden" id="editContactId">
+                <button type="button"
+                        id="editCancelButton"
+                        class="btn btn-danger"
+                        onclick="hideForm()">
+                    Back
+                </button>
+            </div>
+        </div>
+
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- use the the full jQuery build, NOT the slim build-->

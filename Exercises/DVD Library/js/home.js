@@ -1,6 +1,5 @@
 $(document).ready(function () {
     loadDvds();
-    deleteConfirmation();
 });
 
 function loadDvds() {
@@ -19,7 +18,7 @@ function loadDvds() {
                 var rating = movie.rating;
 
                 var row = '<tr>';
-                row += '<td><button type="button" class="btn btn-link" onclick="showMovieContent(' + movieId + ')">' + title + '</button></td>';
+                row += '<td><button type="button" class="btn btn-link" onclick="showMovieInfo(' + movieId + ')">' + title + '</button></td>';
                 row += '<td>' + release + '</td>';
                 row += '<td>' + director + '</td>';
                 row += '<td>' + rating + '</td>';
@@ -63,7 +62,6 @@ function deleteMovie(movieId) {
 function showEditForm (movieId) {
     $('#errorMessages').empty();
 
-
     var editHeader = $('#editHeader');
 
     $.ajax({
@@ -92,18 +90,29 @@ function showEditForm (movieId) {
     $('#editDiv').show();
 };
 
-function showInfo(movieId) {
+function showMovieInfo(movieId) {
     $('#errorMessages').empty();
+    var displayHeader = $('#displayHeader');
+    var content = $('#displayContent')
 
     $.ajax({
         type: 'GET',
         url: 'https://tsg-dvds.herokuapp.com/dvd/' + movieId,
         success: function (data, status) {
-            $('#editTitle').val(data.title);
-            $('#editReleaseYear').val(data.releaseYear);
-            $('#editDirector').val(data.director);
-            $('#editNotes').val(data.notes);
+            var releaseYear = data.releaseYear;
+            var director = data.director;
+            var rating = data.rating;
+            var notes = data.notes;
 
+            displayHeader.append(data.title);
+
+            var p;
+            p += '<p> Release Year:' + releaseYear + '</p>';
+            p += '<p> Director:' + director + '</p>';
+            p += '<p> Rating:' + rating + '</p>';
+            p += '<p> Notes:' + notes + '</p>';
+
+            content.append(p);
         },
         error: function () {
             $('#errorMessages')
@@ -115,12 +124,14 @@ function showInfo(movieId) {
 
     $('#movieData').hide();
     $('.nav').hide();
-    $('#editDiv').show();
+    $('#displayDiv').show();
 };
 
-function hideEditForm() {
+function hideForm() {
     $('#errorMessages').empty();
     $("#editHeader").empty();
+    $('#displayHeader').empty();
+    $('#displayContent').empty();
 
     $('#editTitle').val('');
     $('#editReleaseYEar').val('');
@@ -131,6 +142,7 @@ function hideEditForm() {
     $('#movieData').show();
     $('.nav').show();
     $('#editDiv').hide();
+    $('#displayDiv').hide();
 }
 
 //clear table data
