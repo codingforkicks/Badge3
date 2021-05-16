@@ -42,6 +42,7 @@ function deleteConfirmation(movieId) {
     $('#deleteDiv').show();
     $('#yesButton').on('click', function () {
         deleteMovie(movieId);
+        $('#deleteDiv').hide();
     });
     $('#cancelButton').on('click', function () {
         $('#deleteDiv').hide();
@@ -52,9 +53,9 @@ function deleteConfirmation(movieId) {
 function deleteMovie(movieId) {
     $.ajax({
         type: 'DELETE',
-        url: 'https://tsg-dvds.herokuapp.com/dvds/' + movieId,
+        url: 'https://tsg-dvds.herokuapp.com/dvd/' + movieId,
         success: function () {
-            loadMovies();
+            loadDvds();
         }
     });
 }
@@ -127,6 +128,52 @@ function showMovieInfo(movieId) {
     $('#displayDiv').show();
 };
 
+function showAddForm() {
+    $('#movieData').hide();
+    $('.nav').hide();
+    $('#addDiv').show();
+
+    $('#createButton').on('click', function () {
+        //var haveValidationErrors = checkAndDisplayValidationErrors($('#addForm').find('input'));
+
+        //if (haveValidationErrors) {
+        //    return false;
+        //}
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://tsg-dvds.herokuapp.com/dvd/',
+            data: JSON.stringify({
+                title: $('#addTitle').val(),
+                releaseYear: $('#addReleaseYear').val(),
+                director: $('#addDirector').val(),
+                rating: $('#addRating').val(),
+                notes: $('#addNotes').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json',
+            success: function () {
+                $('#errorMessages').empty();
+                $('#addTitle').val('');
+                $('#addReleaseYear').val('');
+                $('#addDirector').val('');
+                $('#addRating').val('');
+                $('#addNotes').val('');
+                loadDvds();
+            },
+            error: function () {
+                $('#errorMessages')
+                    .append($('<li>')
+                        .attr({ class: 'list-group-item list-group-item-danger' })
+                        .text('Error calling web service. Please try again later.'));
+            }
+        })
+    });
+}
+
 function hideForm() {
     $('#errorMessages').empty();
     $("#editHeader").empty();
@@ -143,6 +190,7 @@ function hideForm() {
     $('.nav').show();
     $('#editDiv').hide();
     $('#displayDiv').hide();
+    $('#addDiv').hide();
 }
 
 //clear table data
