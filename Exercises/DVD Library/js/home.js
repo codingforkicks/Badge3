@@ -23,7 +23,7 @@ function loadDvds() {
                 row += '<td>' + release + '</td>';
                 row += '<td>' + director + '</td>';
                 row += '<td>' + rating + '</td>';
-                row += '<td><button type="button" class="btn btn-link" onclick="deleteConfirmation(' + movieId + ')">Delete</button></td>';
+                row += '<td><button type="button" class="btn btn-link" onclick="editMovie(' + movieId + ')">Edit </button>|<button type="button" class="btn btn-link" onclick="deleteConfirmation(' + movieId + ')">Delete</button></td>';
                 row += '</tr>';
 
                 contentRows.append(row);
@@ -42,7 +42,7 @@ function loadDvds() {
 function deleteConfirmation(movieId) {
     $('#deleteDiv').show();
     $('#yesButton').on('click', function () {
-
+        deleteMovie(movieId);
     });
     $('#cancelButton').on('click', function () {
         $('#deleteDiv').hide();
@@ -53,7 +53,7 @@ function deleteConfirmation(movieId) {
 function deleteMovie(movieId) {
     $.ajax({
         type: 'DELETE',
-        url: 'https://tsg-dvds.herokuapp.com/dvds' + movieId,
+        url: 'https://tsg-dvds.herokuapp.com/dvds/' + movieId,
         success: function () {
             loadMovies();
         }
