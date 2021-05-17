@@ -38,6 +38,43 @@ function loadDvds() {
     });
 };
 
+function saveChanges(movieId) {
+    //var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
+
+    //if (haveValidationErrors) {
+    //    return false;
+    //}
+    alert(movieId);
+
+    $.ajax({
+        type: 'PUT',
+        url: 'https://tsg-dvds.herokuapp.com/dvd/' + movieId,
+        data: JSON.stringify({
+            title: $('#editTitle').val(),
+            releaseYear: $('#editReleaseYear').val(),
+            director: $('#editDirector').val(),
+            rating: $('#editRating').val(),
+            notes: $('#editNotes').val()
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json',
+        'success': function () {
+            $('#errorMessage').empty();
+            hideForm();
+            loadDvds();
+        },
+        'error': function () {
+            $('#errorMessages')
+                .append($('<li>')
+                    .attr({ class: 'list-group-item list-group-item-danger' })
+                    .text('Save Changes: Error calling web service. Please try again later.'));
+        }
+    })
+}
+
 function deleteConfirmation(movieId) {
     $('#deleteDiv').show();
     $('#yesButton').on('click', function () {
@@ -82,9 +119,13 @@ function showEditForm (movieId) {
             $('#errorMessages')
                 .append($('<li>')
                     .attr({ class: 'list-group-item list-group-item-danger' })
-                    .text('Error calling web service. Please try again later.'));
+                    .text('Edit form: Error calling web service. Please try again later.'));
         }
     })
+
+    $('#updateButton').on('click', function (event){
+        saveChanges(movieId);
+    });
 
     $('#movieData').hide();
     $('.nav').hide();
@@ -162,6 +203,7 @@ function showAddForm() {
                 $('#addDirector').val('');
                 $('#addRating').val('');
                 $('#addNotes').val('');
+                hideForm();
                 loadDvds();
             },
             error: function () {
