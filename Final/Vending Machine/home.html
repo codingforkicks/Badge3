@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Vending Machine</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/masonry/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container py-5">
+      <h1 class="text-center">Vending Machine</h1>
+
+      <hr class="my-5">
+
+      <div class="row">
+        <div class="col-sm-8 col-lg-8 mb-4">
+          <div class="row" id="item_container">
+            <!-- List Card Item -->
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-4 mb-4">
+          <div class="row">
+            <div class="col-sm-12 col-lg-12">
+              <p class="text-center">Total $ In</p>
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-2">
+              <input type="text" class="form-control text-center" name="" id="total_money" value="0.00">
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="dollar">Add Dollar</button>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="quarter">Add Quarter</button>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="dime">Add Dime</button>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="nickel">Add Nickel</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12 col-lg-12">
+              <p class="text-center">Messages</p>
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-2">
+              <input type="textarea" class="form-control text-center" name="" id="messages_purchase">
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <p class="text-center">Item :</p>
+            </div>
+            <div class="col-sm-6 col-lg-6 mb-2">
+              <input type="text" class="form-control" name="" id="item_id">
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="btn_make_purchase">Make Purchase</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12 col-lg-12">
+              <p class="text-center">Change</p>
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-2">
+              <input type="text" class="form-control text-center" name="" id="change_return">
+            </div>
+            <div class="col-sm-12 col-lg-12 mb-2">
+              <button type="button" class="btn btn-outline-primary w-100" id="btn_change_return">Change Return</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="css/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/home.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+  </body>
+</html>
